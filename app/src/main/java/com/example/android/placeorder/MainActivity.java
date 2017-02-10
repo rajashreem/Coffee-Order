@@ -6,9 +6,10 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    int quantity = 0;
+    int quantity = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,11 +18,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void increment(View view){
+        if(quantity == 99){
+            Toast.makeText(this, "You can not order more than 99 cups of coffee", Toast.LENGTH_SHORT).show();
+        }
         quantity = quantity + 1;
         display(quantity);
     }
 
     public void decrement(View view){
+        if(quantity == 1){
+            Toast.makeText(this, "You can not order less than 1 cup of coffee", Toast.LENGTH_SHORT).show();
+        }
         quantity = quantity - 1;
         display(quantity);
     }
