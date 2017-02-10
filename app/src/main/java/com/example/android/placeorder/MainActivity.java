@@ -1,5 +1,7 @@
 package com.example.android.placeorder;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -45,7 +47,20 @@ public class MainActivity extends AppCompatActivity {
 
         int price = calculatePrice(hasWhippedCream, hasChocolate);
 
-        printOrderSummary(name, price, hasWhippedCream, hasChocolate);
+        String orderSummary = printOrderSummary(name, price, hasWhippedCream, hasChocolate);
+
+        sendEmail(orderSummary);
+    }
+
+    private void sendEmail(String orderSummary) {
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:"));
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Your coffee order");
+        intent.putExtra(Intent.EXTRA_TEXT, orderSummary);
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 
     private int calculatePrice(boolean hasWhippedCream, boolean hasChocolate) {
@@ -66,18 +81,13 @@ public class MainActivity extends AppCompatActivity {
         quantityTextView.setText("" + number);
     }
 
-    private void printOrderSummary(String name, int price, boolean hasWhippedCream, boolean hasChocolate) {
+    private String printOrderSummary(String name, int price, boolean hasWhippedCream, boolean hasChocolate) {
         String message = "Name : " + name + "\n" +
                 "Add Whipped Cream? " + hasWhippedCream + "\n" +
                 "Add Chocolate? " + hasChocolate + "\n" +
                 "Quantity: " + quantity + "\n" +
                 "Total: $" + price + "\nThank you!";
 
-        displayMessage(message);
-    }
-
-    private void displayMessage(String message) {
-        TextView priceTextView = (TextView) findViewById(R.id.order_summary_text_view);
-        priceTextView.setText(message);
+        return message;
     }
 }
