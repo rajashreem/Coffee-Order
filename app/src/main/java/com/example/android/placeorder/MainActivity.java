@@ -25,9 +25,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void submitOrder(View view) {
-        int price = quantity * 5;
-        String message = "Total: $" + price + "\nThank you!";
-        displayMessage(message);
+        int price = calculatePrice();
+        printOrderSummary(price);
+    }
+
+    private int calculatePrice() {
+        return quantity * 5;
     }
 
     private void display(int number) {
@@ -35,8 +38,12 @@ public class MainActivity extends AppCompatActivity {
         quantityTextView.setText("" + number);
     }
 
-    private void displayMessage(String message) {
-        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
+    private void printOrderSummary(int price) {
+        String message = "Name : Rajashree Malvade\n" +
+                "Quantity: " + quantity + "\n" +
+                "Total: $" + price + "\nThank you!";
+
+        TextView priceTextView = (TextView) findViewById(R.id.order_summary_text_view);
         priceTextView.setText(message);
     }
 }
