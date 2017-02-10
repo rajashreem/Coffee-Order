@@ -31,7 +31,10 @@ public class MainActivity extends AppCompatActivity {
         CheckBox whippedCreamCheckBox = (CheckBox) findViewById(R.id.whipped_cream_check_box);
         boolean hasWhippedCream = whippedCreamCheckBox.isChecked();
 
-        printOrderSummary(price, hasWhippedCream);
+        CheckBox chocolateCheckBox = (CheckBox) findViewById(R.id.chocolate_check_box);
+        boolean hasChocolate = chocolateCheckBox.isChecked();
+
+        printOrderSummary(price, hasWhippedCream, hasChocolate);
     }
 
     private int calculatePrice() {
@@ -43,9 +46,10 @@ public class MainActivity extends AppCompatActivity {
         quantityTextView.setText("" + number);
     }
 
-    private void printOrderSummary(int price, boolean hasWhippedCream) {
+    private void printOrderSummary(int price, boolean hasWhippedCream, boolean hasChocolate) {
         String message = "Name : Rajashree Malvade\n" +
                 "Add Whipped Cream? " + hasWhippedCream + "\n" +
+                "Add Chocolate? " + hasChocolate + "\n" +
                 "Quantity: " + quantity + "\n" +
                 "Total: $" + price + "\nThank you!";
 
