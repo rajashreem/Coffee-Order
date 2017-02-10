@@ -27,8 +27,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void submitOrder(View view) {
-        int price = calculatePrice();
-
         EditText nameText = (EditText) findViewById(R.id.name_edit_text);
         String name = nameText.getText().toString();
 
@@ -38,11 +36,22 @@ public class MainActivity extends AppCompatActivity {
         CheckBox chocolateCheckBox = (CheckBox) findViewById(R.id.chocolate_check_box);
         boolean hasChocolate = chocolateCheckBox.isChecked();
 
+        int price = calculatePrice(hasWhippedCream, hasChocolate);
+
         printOrderSummary(name, price, hasWhippedCream, hasChocolate);
     }
 
-    private int calculatePrice() {
-        return quantity * 5;
+    private int calculatePrice(boolean hasWhippedCream, boolean hasChocolate) {
+        int basePrice = 5;
+
+        if(hasWhippedCream){
+            basePrice += 1;
+        }
+        if(hasChocolate){
+            basePrice += 2;
+        }
+
+        return basePrice * quantity;
     }
 
     private void display(int number) {
