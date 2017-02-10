@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,13 +29,16 @@ public class MainActivity extends AppCompatActivity {
     public void submitOrder(View view) {
         int price = calculatePrice();
 
+        EditText nameText = (EditText) findViewById(R.id.name_edit_text);
+        String name = nameText.getText().toString();
+
         CheckBox whippedCreamCheckBox = (CheckBox) findViewById(R.id.whipped_cream_check_box);
         boolean hasWhippedCream = whippedCreamCheckBox.isChecked();
 
         CheckBox chocolateCheckBox = (CheckBox) findViewById(R.id.chocolate_check_box);
         boolean hasChocolate = chocolateCheckBox.isChecked();
 
-        printOrderSummary(price, hasWhippedCream, hasChocolate);
+        printOrderSummary(name, price, hasWhippedCream, hasChocolate);
     }
 
     private int calculatePrice() {
@@ -46,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
         quantityTextView.setText("" + number);
     }
 
-    private void printOrderSummary(int price, boolean hasWhippedCream, boolean hasChocolate) {
-        String message = "Name : Rajashree Malvade\n" +
+    private void printOrderSummary(String name, int price, boolean hasWhippedCream, boolean hasChocolate) {
+        String message = "Name : " + name + "\n" +
                 "Add Whipped Cream? " + hasWhippedCream + "\n" +
                 "Add Chocolate? " + hasChocolate + "\n" +
                 "Quantity: " + quantity + "\n" +
