@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
         boolean hasChocolate = chocolateCheckBox.isChecked();
 
         int price = calculatePrice(hasWhippedCream, hasChocolate);
-
         String orderSummary = printOrderSummary(name, price, hasWhippedCream, hasChocolate);
 
         sendEmail(orderSummary);
