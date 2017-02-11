@@ -19,20 +19,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void increment(View view){
-        if(quantity == 99){
+    public void increment(View view) {
+        if (quantity == 99) {
             Toast.makeText(this, "You can not order more than 99 cups of coffee", Toast.LENGTH_SHORT).show();
+        } else {
+            quantity = quantity + 1;
+            display(quantity);
         }
-        quantity = quantity + 1;
-        display(quantity);
     }
 
-    public void decrement(View view){
-        if(quantity == 1){
+    public void decrement(View view) {
+        if (quantity == 1) {
             Toast.makeText(this, "You can not order less than 1 cup of coffee", Toast.LENGTH_SHORT).show();
+        } else {
+            quantity = quantity - 1;
+            display(quantity);
         }
-        quantity = quantity - 1;
-        display(quantity);
     }
 
     public void submitOrder(View view) {
@@ -65,10 +67,10 @@ public class MainActivity extends AppCompatActivity {
     private int calculatePrice(boolean hasWhippedCream, boolean hasChocolate) {
         int basePrice = 5;
 
-        if(hasWhippedCream){
+        if (hasWhippedCream) {
             basePrice += 1;
         }
-        if(hasChocolate){
+        if (hasChocolate) {
             basePrice += 2;
         }
 
